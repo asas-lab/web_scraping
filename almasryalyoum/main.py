@@ -10,6 +10,7 @@ import time
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 import pandas as pd
+
 from selenium_stealth import stealth
 from selenium.common.exceptions import TimeoutException
 
