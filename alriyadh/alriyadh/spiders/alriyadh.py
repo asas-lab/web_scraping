@@ -40,6 +40,6 @@ class Alriyadh(scrapy.Spider):
 
     def closed(self, reason):
         # Save the chapters as a JSON file
-        json_path = '/home/khalid/Documents/github_rep/MyProjects/scrap/alriyadh.json'
+        json_path = 'alriyadh.json'
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(self.items, f, ensure_ascii=False, indent=4)
