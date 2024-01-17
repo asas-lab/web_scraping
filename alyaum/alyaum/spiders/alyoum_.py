@@ -5,9 +5,10 @@ class AlyoumSpider(scrapy.Spider):
     name = 'alyoum_'
     allowed_domains = ['alyaum.com']
     start_urls = ['https://www.alyaum.com/articles/1']
-    self.items = []
     # latest_page = 6505041
     latest_page = 10
+    items = []
+
     def start_requests(self):
         for i in range(1, self.latest_page+1):
             yield scrapy.Request(
