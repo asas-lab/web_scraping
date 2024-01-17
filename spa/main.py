@@ -5,7 +5,6 @@ from time import sleep
 from selenium import webdriver
 import os
 from selenium.webdriver.common.by import By
-import csv
 from time import sleep
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -17,7 +16,7 @@ from selenium.common.exceptions import TimeoutException
 # latest_page_number = 14684
 latest_page_number = 4
 
-# Set the save rate (for the main pages) for saving data to CSV file
+# Set the save rate (for the main pages) for saving data to json file
 save_rate = 1
 
 # Get the current working directory
@@ -25,12 +24,12 @@ current_path = os.getcwd()
 
 # Set the path for the Chrome webdriver
 webdriver_path = f'{current_path}\chromedriver.exe'
-csv_data_file_path = f'{current_path}\data.csv'
+json_data_file_path = f'{current_path}\spa.json'
 
-# Check if the CSV data file exists
-if os.path.exists(csv_data_file_path):
-    # Read the existing CSV file
-    df = pd.read_csv(csv_data_file_path, encoding='utf-8')
+# Check if the json data file exists
+if os.path.exists(json_data_file_path):
+    # Read the existing json file
+    df = pd.read_json(json_data_file_path)
 else:
     # Create a new DataFrame
     df = pd.DataFrame(columns=['Main page number','url', 'title', 'Page_info', 'Body'])
@@ -68,5 +67,5 @@ for page_num in range(1,latest_page_number+1):
         # Concatenate the new data with the existing DataFrame
         df = pd.concat([df, new_data], ignore_index=True)
     if page_num % save_rate == 0:
-        df.to_csv(csv_data_file_path, index=False, encoding='utf-8')
-        print(f'Saved data to CSV file at page {page_num}')
+        df.to_json(json_data_file_path, orient='records', lines=True, force_ascii=False)
+        print(f'Saved data to json file at page {page_num}')
