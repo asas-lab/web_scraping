@@ -4,6 +4,7 @@ class OkazSpider(scrapy.Spider):
     name = 'okaz_'
     allowed_domains = ['okaz.com.sa']
     start_urls = ['https://www.okaz.com.sa/news/local/2150775']
+    items = []
 
     def start_requests(self):
         df=pd.read_csv(f'links.csv')
@@ -26,11 +27,16 @@ class OkazSpider(scrapy.Spider):
         article_meta_text = " ".join(article_meta_text)
         body_text = response.xpath('//div[@class="bodyText"]/text()').getall()
         body_text = " ".join(body_text)
-        yield {
+        self.items.append({
             'Category': response.meta['category'],
             'Page_link': response.url,
             'title': title,
             'article_meta_text': article_meta_text,
             'body_text': body_text
-        }
+        })
 
+    def closed(self, reason):
+        # Save the chapters as a JSON file
+        json_path = 'okaz.json'
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(self.items, f, ensure_ascii=False, indent=4)
