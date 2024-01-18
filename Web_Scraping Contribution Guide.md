@@ -45,3 +45,27 @@ cd news_website_name
 scrapy crawl news_website_name
 
 ```
+
+For Selenium:
+
+Navigate to the corresponding website directory and run:
+
+```
+cd news_website_name
+python main.py
+
+```
+
+5. Locate the Generated Json File:
+
+`news_website_name.py` file is found in the news website directory folder. The file contains the crawled content in json line format.
+
+5. Upload the dataset:
+
+Run the upload script `upload.py` which designed to upload the files into HuggingFace. You can run the code using the following  command:
+
+```
+cd news_website_name
+python upload.py --file_path "json_file_path"
+
+```
