@@ -66,6 +66,6 @@ Run the upload script `upload.py` which designed to upload the files into Huggin
 
 ```
 cd news_website_name
-python upload.py --file_path "json_file_path"
+python upload.py --token tyour_token_in_hf --dataset_path path_to_json_file --hf_repository_name dataset_name_or_path_in_hf
 
 ```
