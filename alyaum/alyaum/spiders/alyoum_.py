@@ -5,9 +5,10 @@ class AlyoumSpider(scrapy.Spider):
     name = 'alyoum_'
     allowed_domains = ['alyaum.com']
     start_urls = ['https://www.alyaum.com/articles/1']
-
     # latest_page = 6505041
     latest_page = 10
+    items = []
+
     def start_requests(self):
         for i in range(1, self.latest_page+1):
             yield scrapy.Request(
@@ -22,7 +23,7 @@ class AlyoumSpider(scrapy.Spider):
             url=link,
             callback=self.parse_article
         )
-        
+
     def parse_article(self,response):
         # print('res text', response.text)
         title= response.xpath('//div[@class="aksa-to1-main main-article-title"]/h1/text()').get()
@@ -32,10 +33,15 @@ class AlyoumSpider(scrapy.Spider):
         body= response.xpath('//div[@class="aksa-articleBody"]/text()').getall()[-1]
         # print('body: ',body)
 
-        yield{
+        self.items.append({
             'url':response.url,
             'title':title,
             'date':date,
             'body':body
-        }
+        })
 
+    def closed(self, reason):
+        # Save the chapters as a JSON file
+        json_path = 'alyoum.json'
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(self.items, f, ensure_ascii=False, indent=4)
