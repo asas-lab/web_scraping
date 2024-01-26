@@ -11,7 +11,7 @@ class Almadina (scrapy.Spider):
         super().__init__(*args, **kwargs)
         self.items = []
         self.first_page = 500083
-        self.last_page = 870815 + 1
+        self.last_page = 500083 + 1
     def start_requests(self):
         for i in range(self.first_page,self.last_page):  # Change to this after first page 897201 last page 1559429, before 2045191
             url = f'https://www.al-madina.com/article/{i}'
@@ -41,6 +41,6 @@ class Almadina (scrapy.Spider):
 
     def closed(self, reason):
         # Save the chapters as a JSON file
-        json_path = '/home/khalid/Documents/github_rep/MyProjects/scrap/almadina/almadina.json'
+        json_path = 'almadina.json'
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(self.items, f, ensure_ascii=False, indent=4)
