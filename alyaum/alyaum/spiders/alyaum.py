@@ -1,12 +1,13 @@
 import scrapy
-
+from pathlib import Path
+import json
 
 class AlyoumSpider(scrapy.Spider):
-    name = 'alyoum_'
+    name = 'alyaum'
     allowed_domains = ['alyaum.com']
     start_urls = ['https://www.alyaum.com/articles/1']
     # latest_page = 6505041
-    latest_page = 10
+    latest_page = 3
     items = []
 
     def start_requests(self):
@@ -42,6 +43,6 @@ class AlyoumSpider(scrapy.Spider):
 
     def closed(self, reason):
         # Save the chapters as a JSON file
-        json_path = 'alyoum.json'
+        json_path = 'alyaum.json'
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(self.items, f, ensure_ascii=False, indent=4)
