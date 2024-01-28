@@ -10,7 +10,7 @@ class NaseejSpider(scrapy.Spider):
     start_urls = ['https://www.naseej.com/ar/news/page/1']
 
     # check the number of pages from the website
-    number_of_pages = 1
+    number_of_pages = 1000
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

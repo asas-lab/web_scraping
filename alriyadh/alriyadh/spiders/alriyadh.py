@@ -11,7 +11,7 @@ class Alriyadh(scrapy.Spider):
         super().__init__(*args, **kwargs)
         self.items = []
         self.first_page = 897201
-        self.latest_page = 2045191
+        self.latest_page = 1152499
     def start_requests(self):
         for i in range(self.first_page,self.latest_page+1):  # Change to this after first page 897201 last page 1559429, before 2045191
             url = f'https://www.alriyadh.com/{i}'

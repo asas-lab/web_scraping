@@ -5,13 +5,13 @@ import json
 class AlyoumSpider(scrapy.Spider):
     name = 'alyaum'
     allowed_domains = ['alyaum.com']
-    start_urls = ['https://www.alyaum.com/articles/1']
+    start_urls = ['https://www.alyaum.com/articles/904000']
     # latest_page = 6505041
-    latest_page = 3
+    latest_page = 6511165+50000
     items = []
 
     def start_requests(self):
-        for i in range(1, self.latest_page+1):
+        for i in range(904000, self.latest_page+50000):
             yield scrapy.Request(
                 url=f'https://www.alyaum.com/articles/{i}',
                 callback=self.parse
