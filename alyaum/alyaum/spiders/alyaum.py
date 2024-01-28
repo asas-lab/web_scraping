@@ -7,7 +7,7 @@ class AlyoumSpider(scrapy.Spider):
     allowed_domains = ['alyaum.com']
     start_urls = ['https://www.alyaum.com/articles/904000']
     # latest_page = 6505041
-    latest_page = 6511165+50000
+    latest_page = 6511165
     items = []
 
     def start_requests(self):
